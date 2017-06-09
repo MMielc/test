@@ -11,12 +11,15 @@
 #include "Robot.hh"
 #include "Scena.hh"
 #include "Trasa.hh"
+#include "Fabryka_Ob.hh"
 
 using namespace std;
 
 void wyswietlMenu(ostream& Strm)
 {
   Strm<<"\n"
+  "R - dodaj robota\n"
+  "P - dodaj przeszkode\n"
   "z - zmiana szybkosci ruchu robota\n"
   "o - obrot robota\n"
   "j - jazda na wprost\n"
@@ -57,35 +60,6 @@ int main()
    //
   Lacze.ZmienTrybRys(PzG::TR_2D);
 
-  // bck.wyswietlScene();
-  
-  // int costam=10;
-
-  // while(costam!=0){
-  // cin>>costam;
-
-  // if (costam == 1)
-  // {
-  //  int id;
-  //  double kat;
-  //  cout<<"podaj id i kat: "<<endl;
-  //  cin>>id>>kat;
-  //  bck.obrotRobota(kat,id-1);
-  // } 
-
-  // if (costam == 2)
-  // {
-  //   int id;
-  //   double dlugosc;
-  //   cout<<"podaj id i dlugosc ruchu: "<<endl;
-  //   cin>>id>>dlugosc;
-  //   if(bck.ruchRobota(dlugosc,id-1))
-  //   {
-  //     cout<<"\n\n !!!KOLIZJA!!!\n\n"<<endl;
-  //   }
-  // }
-
-  // } return 0;
   SCN.wyswietlScene();
   wyswietlMenu(cout); 
   wyswietlStat(cout);
@@ -100,6 +74,26 @@ while(znak != 'k')
   
   switch (znak)
   {
+    case 'P': 
+    {
+      Wektor2D wsp1,roz1;
+      cout<<" Podaj polozenie przeszkody x y oraz dlugosc bokow a b: "<<endl;
+      cin>>wsp1>>roz1;
+      SCN.dodajObiektGraf(TO_Przeszkoda,wsp1,roz1);
+      SCN.wyswietlScene();
+    }
+    break;
+
+    case 'R': 
+    {
+      Wektor2D wsp2,roz2;
+      cout<<" Podaj polozenie robota x y: "<<endl;
+      cin>>wsp2;
+      SCN.dodajObiektGraf(TO_Robot,wsp2,roz2);
+      SCN.wyswietlScene();
+    }
+    break;
+
     case 'z': 
     {
       int P;
@@ -134,13 +128,14 @@ while(znak != 'k')
 
     case 's':
     {
-      int tmp;
-      for(int i=0;i<3;i++)
-      cout<<" Robot "<<i+1<<".    Wspolrzedne: "<< SCN.wezPozRob(i) <<endl;
-      cout<<endl;
-    	cout<<" Podaj numer robota, ktory ma byc obslugiwany: "<<endl;
-		  cin>>tmp;
-      identyfikator = tmp -1;
+      SCN.wyswietlPozycjeRobotow(cout);
+       int tmp;
+      // for(int i=0;i<3;i++)
+      // cout<<" Robot "<<i+1<<".    Wspolrzedne: "<< SCN.wezPozRob(i) <<endl;
+      // cout<<endl;
+    	 cout<<" Podaj numer robota, ktory ma byc obslugiwany: "<<endl;
+		   cin>>tmp;
+       identyfikator = tmp -1;
     }
     break;
 

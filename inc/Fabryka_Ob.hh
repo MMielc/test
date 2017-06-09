@@ -1,9 +1,13 @@
 #ifndef FABRYKA_OB_HH
 #define FABRYKA_OB_HH
+
 #include "Wektor2D.hh"
 #include "Zbior_Wierzch.hh"
 #include "Obiekt_Graf.hh"
 #include "Robot.hh"
+#include <memory>
+#include <fstream>
+#include <unistd.h>
 
 enum TypObiektu { TO_Robot, TO_Sciezka, TO_Przeszkoda };
 
@@ -15,26 +19,74 @@ class Fabryka_Ob {
 
   public:
 
-    static shared_ptr<ObiektGraf> Zbuduj( TypObiektu  TypOb )
-    {
-      return _Fabryka_Ob.UtworzObiekt(TypOb);
-    }
+    // static std::shared_ptr<Obiekt_Graf> Zbuduj( TypObiektu  TypOb , Wektor2D wsp, Wektor2D rozm)
+    // {
+    //   return _Fabryka_Ob.UtworzObiekt(TypOb, wsp, rozm);
+    // }
 
-  private:
+  
 
-    shared_ptr<ObiektGraf> UtworzObiekt( TypObiektu  TypOb ) const
-    {
-      switch (TypOb) {
-       case TO_Robot: return make_shared<Robot>();
-       case TO_Sciezka: return make_shared<Trasa>();
-       case TO_Przeszkoda: return make_shared<Przeszkoda>();
-      }
-      return make_shared<Przeszkoda>(); // To tylko po to, aby kompilator
-                // nie twierdził, że metoda nic nie zwraca. Ta instrukcja 
-                // i tak nigdy się nie wykona.
-    }
+  static std::shared_ptr<Robot> ZbudujObiektRobot( Wektor2D wsp) 
+  {
+    return _Fabryka_Ob.UtworzObiektRobot(wsp);
+  }
+
+  static std::shared_ptr<Przeszkoda> ZbudujObiektPrzeszkoda(  Wektor2D wsp, Wektor2D rozm ) 
+  {
+    return _Fabryka_Ob.UtworzObiektPrzeszkoda(wsp,rozm);
+  }
+
+  static std::shared_ptr<Trasa> ZbudujObiektTrasa() 
+  {
+    return _Fabryka_Ob.UtworzObiektTrasa();
+  }
+
+  private: /* -------------------------------------------------------------------*/
+
+   std::shared_ptr<Robot> UtworzObiektRobot( Wektor2D wsp) const
+  {
+    std::shared_ptr<Robot> Rob(new Robot(wsp[0],wsp[1]));
+    return Rob;
+  }
+
+   std::shared_ptr<Przeszkoda> UtworzObiektPrzeszkoda(  Wektor2D wsp, Wektor2D rozm ) const
+  {
+    std::shared_ptr<Przeszkoda> Prz(new Przeszkoda(wsp[0],wsp[1],rozm[0],rozm[1]));
+    return Prz;
+  }
+
+   std::shared_ptr<Trasa> UtworzObiektTrasa() const
+  {
+    std::shared_ptr<Trasa> Trs(new Trasa());
+    return Trs;
+  }
+
+
+    // std::shared_ptr<Obiekt_Graf> UtworzObiekt( TypObiektu  TypOb , Wektor2D wsp, Wektor2D rozm ) const
+    // {
+    //   switch (TypOb) {
+    //    case TO_Robot:  
+    //    {
+    //     std::shared_ptr<Robot> Rob(new Robot(wsp[0],wsp[0])); //return std::make_shared<Robot>(wsp[0],wsp[1]);
+    //     return Rob;
+    //    }
+    //    case TO_Sciezka: 
+    //    {
+    //      std::shared_ptr<Trasa> Trs(new Trasa());
+    //      return Trs;
+    //    }
+    //    case TO_Przeszkoda: 
+    //    {
+    //      std::shared_ptr<Przeszkoda> Prz(new Przeszkoda(wsp[0],wsp[0],rozm[0],rozm[0]));
+    //      return Prz;
+    //    }
+    //   }
+    //   return std::make_shared<Przeszkoda>(); // To tylko po to, aby kompilator
+    //             // nie twierdził, że metoda nic nie zwraca. Ta instrukcja 
+    //             // i tak nigdy się nie wykona.
+    // }
 };
 
-Fabryka_Ob Fabryka_Ob::_Fabryka_Ob;
+
 
 #endif

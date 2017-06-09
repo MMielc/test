@@ -9,6 +9,7 @@
 #include "Robot.hh"
 #include "lacze_do_gnuplota.hh"
 #include "Przeszkoda.hh"
+#include "Fabryka_Ob.hh"
 
 #include <memory>
 #include <vector>
@@ -29,6 +30,10 @@ class Scena{
   std::list<std::shared_ptr<Robot>> LST_rbt;
 
   public:
+
+  void wyswietlPozycjeRobotow(std::ostream & str);
+
+  void dodajObiektGraf(TypObiektu typ, Wektor2D wsp, Wektor2D rozm);
 
   /*!
   * funkcja: konstruktor klasy Scena

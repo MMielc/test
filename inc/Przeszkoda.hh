@@ -15,6 +15,7 @@ class Przeszkoda: public Obiekt_Graf{
 
   public:
 
+  Przeszkoda() {}
   /*!
   * funkcja: konstruktor klasy Przeszkoda
   */

@@ -1,5 +1,29 @@
 #include "Scena.hh"
 
+void Scena::dodajObiektGraf(TypObiektu typ, Wektor2D wsp, Wektor2D rozm)
+{
+	switch (typ)
+	{
+		case TO_Robot:
+		{
+			LST.push_back(Fabryka_Ob::ZbudujObiektRobot( wsp));
+			LST_rbt.push_back(Fabryka_Ob::ZbudujObiektRobot( wsp));
+			LST.push_back(Fabryka_Ob::ZbudujObiektRobot( wsp));
+		}
+		break;
+
+		case TO_Przeszkoda:
+		{
+			LST.push_back(Fabryka_Ob::ZbudujObiektPrzeszkoda(  wsp, rozm ));
+		}
+		break;
+
+		case TO_Sciezka:
+			LST.push_back(Fabryka_Ob::ZbudujObiektTrasa());
+		break;
+	}
+}
+
 Scena::Scena (PzG::LaczeDoGNUPlota  lcz)
 {
 	 std::shared_ptr<Robot> wRob_1(new Robot(100,-100));
@@ -159,6 +183,12 @@ void Scena::przesuniecie (Wektor2D Wek)
 	// wyswietlScene();
 }
 
+void Scena::wyswietlPozycjeRobotow(std::ostream & str)
+{
+      for(unsigned int i=0;i<LST_rbt.size();i++)
+      str<<" Robot "<<i+1<<".    Wspolrzedne: "<< wezPozRob(i) <<std::endl;
+      str<<std::endl;
+}
 
 
 
