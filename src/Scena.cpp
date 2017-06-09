@@ -6,9 +6,10 @@ void Scena::dodajObiektGraf(TypObiektu typ, Wektor2D wsp, Wektor2D rozm)
 	{
 		case TO_Robot:
 		{
-			LST.push_back(Fabryka_Ob::ZbudujObiektRobot( wsp));
-			LST_rbt.push_back(Fabryka_Ob::ZbudujObiektRobot( wsp));
-			LST.push_back(Fabryka_Ob::ZbudujObiektRobot( wsp));
+			std::shared_ptr<Robot> rbt = Fabryka_Ob::ZbudujObiektRobot( wsp);
+			LST.push_back(rbt);
+			LST_rbt.push_back(rbt);
+			LST.push_back(Fabryka_Ob::ZbudujObiektTrasa());
 		}
 		break;
 
@@ -110,7 +111,7 @@ bool Scena::ruchRobota(double dl_kroku, int id)
     {
 					rysujTraseRobota(id);
 					zwrocWskRobota(id)->RuchWPrzod(dl_kroku/zwrocWskRobota(id)->wezPredkosc());
-					sleep(0.2);
+					sleep(0.1);
 
 					licznik = 0;
 					for( std::shared_ptr<Obiekt_Graf> prz : LST)
