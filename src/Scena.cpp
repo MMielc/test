@@ -6,10 +6,12 @@ void Scena::dodajObiektGraf(TypObiektu typ, Wektor2D wsp, Wektor2D rozm)
 	{
 		case TO_Robot:
 		{
-			std::shared_ptr<Robot> rbt = Fabryka_Ob::ZbudujObiektRobot( wsp);
+			std::shared_ptr<Trasa> trs = Fabryka_Ob::ZbudujObiektTrasa();
+			LST.push_back(trs);
+			std::shared_ptr<Robot> rbt = Fabryka_Ob::ZbudujObiektRobot( wsp, trs);
 			LST.push_back(rbt);
 			LST_rbt.push_back(rbt);
-			LST.push_back(Fabryka_Ob::ZbudujObiektTrasa());
+			
 		}
 		break;
 
@@ -27,17 +29,19 @@ void Scena::dodajObiektGraf(TypObiektu typ, Wektor2D wsp, Wektor2D rozm)
 
 Scena::Scena (PzG::LaczeDoGNUPlota  lcz)
 {
-	 std::shared_ptr<Robot> wRob_1(new Robot(100,-100));
-	 std::shared_ptr<Robot> wRob_2(new Robot(0,0));
-	 std::shared_ptr<Robot> wRob_3(new Robot(100,150));
+	 std::shared_ptr<Trasa> wTrs_1(new Trasa);
+	 std::shared_ptr<Trasa> wTrs_2(new Trasa);
+	 std::shared_ptr<Trasa> wTrs_3(new Trasa);
+
+	 std::shared_ptr<Robot> wRob_1(new Robot(100,-100, wTrs_1));
+	 std::shared_ptr<Robot> wRob_2(new Robot(0,0, wTrs_2));
+	 std::shared_ptr<Robot> wRob_3(new Robot(100,150, wTrs_3));
 
 	 std::shared_ptr<Obiekt_Graf> wPrz_1(new Przeszkoda(-240, -50, 180, 90));
 	 std::shared_ptr<Obiekt_Graf> wPrz_2(new Przeszkoda(160, -50, 90, 200));
 	 std::shared_ptr<Obiekt_Graf> wPrz_3(new Przeszkoda(-90, 210, 200, 30));
 
-	 std::shared_ptr<Obiekt_Graf> wTrs_1(new Trasa);
-	 std::shared_ptr<Obiekt_Graf> wTrs_2(new Trasa);
-	 std::shared_ptr<Obiekt_Graf> wTrs_3(new Trasa);
+	 
 
 	 LST.push_back(wRob_1);
 	 LST.push_back(wRob_2);
@@ -82,11 +86,11 @@ std::shared_ptr<Robot> Scena::zwrocWskRobota( int id )
 void Scena::rysujTraseRobota (int id)
 {
 	int licz=0;
-			for( std::shared_ptr<Obiekt_Graf> trs : LST)	
+			for( std::shared_ptr<Robot> rbt : LST_rbt)	
 			{
-				if(licz == 6 + id) 
+				if(licz == id) 
 				{
-						zwrocWskRobota(id)->RysujTrase(*trs);
+						rbt->RysujTrase(*(rbt->WezWskNaTrase()));
 				}
 				licz ++;
 			}

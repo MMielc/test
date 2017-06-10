@@ -19,13 +19,16 @@ class Robot: public Obiekt_Graf{
   Wektor2D pozycja;
   double kat_rotacji;
   int predkosc;
+  std::shared_ptr<Trasa> wskNaTraseRobota;
 
   public: 
+
+  std::shared_ptr<Trasa> WezWskNaTrase() {return wskNaTraseRobota;}
 
     /*!
     * funkcja: konstruktor klasy Robot
     */
-    Robot (double x, double y); 
+    Robot (double x, double y, std::shared_ptr<Trasa> wskTrs); 
 
     /*!
     * funkcja: obrot robota wokol wlasnej osi

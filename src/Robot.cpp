@@ -2,12 +2,14 @@
 #include <math.h>
 
 
-Robot::Robot (double x, double y)
+Robot::Robot (double x, double y, std::shared_ptr<Trasa> wskTrs)
 :
  predkosc(7)
 
 {
 kat_rotacji = 0;
+
+wskNaTraseRobota = wskTrs;
 
  Wektor2D ini;
  ini[0] = 0;

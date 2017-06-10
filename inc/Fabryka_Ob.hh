@@ -2,9 +2,9 @@
 #define FABRYKA_OB_HH
 
 #include "Wektor2D.hh"
-#include "Zbior_Wierzch.hh"
-#include "Obiekt_Graf.hh"
 #include "Robot.hh"
+#include "Trasa.hh"
+#include "Przeszkoda.hh"
 #include <memory>
 #include <fstream>
 #include <unistd.h>
@@ -26,9 +26,9 @@ class Fabryka_Ob {
 
   
 
-  static std::shared_ptr<Robot> ZbudujObiektRobot( Wektor2D wsp) 
+  static std::shared_ptr<Robot> ZbudujObiektRobot( Wektor2D wsp, std::shared_ptr<Trasa> wskTrs) 
   {
-    return _Fabryka_Ob.UtworzObiektRobot(wsp);
+    return _Fabryka_Ob.UtworzObiektRobot(wsp,wskTrs);
   }
 
   static std::shared_ptr<Przeszkoda> ZbudujObiektPrzeszkoda(  Wektor2D wsp, Wektor2D rozm ) 
@@ -43,9 +43,9 @@ class Fabryka_Ob {
 
   private: /* -------------------------------------------------------------------*/
 
-   std::shared_ptr<Robot> UtworzObiektRobot( Wektor2D wsp) const
+   std::shared_ptr<Robot> UtworzObiektRobot( Wektor2D wsp, std::shared_ptr<Trasa> wskTrs) const
   {
-    std::shared_ptr<Robot> Rob(new Robot(wsp[0],wsp[1]));
+    std::shared_ptr<Robot> Rob(new Robot(wsp[0],wsp[1],wskTrs));
     return Rob;
   }
 

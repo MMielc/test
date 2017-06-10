@@ -1,9 +1,8 @@
 #ifndef TRASA_HH
 #define TRASA_HH
 #include "Wektor2D.hh"
-#include "Zbior_Wierzch.hh"
 #include "Obiekt_Graf.hh"
-#include "Robot.hh"
+
 
 /*! \brief klasa: Trasa - klasa pochodna od klasy Obiekt_Graf
 */
