@@ -113,9 +113,6 @@ bool Scena::ruchRobota(double dl_kroku, int id)
 
   for(int i = 0; i<zwrocWskRobota(id)->wezPredkosc(); i++)
     {
-					rysujTraseRobota(id);
-					zwrocWskRobota(id)->RuchWPrzod(dl_kroku/zwrocWskRobota(id)->wezPredkosc());
-					sleep(0.1);
 
 					licznik = 0;
 					for( std::shared_ptr<Obiekt_Graf> prz : LST)
@@ -132,6 +129,9 @@ bool Scena::ruchRobota(double dl_kroku, int id)
 								return true;
 							}
 					}
+					rysujTraseRobota(id);
+					zwrocWskRobota(id)->RuchWPrzod(dl_kroku/zwrocWskRobota(id)->wezPredkosc());
+					sleep(0.1);
 					wyswietlScene();
     }
 		 rysujTraseRobota(id);

@@ -65,18 +65,6 @@ class Robot: public Obiekt_Graf{
     int wezPredkosc() {return predkosc;}
 
     /*!
-    * funkcja: sprawdzenie kolizji z obiektem typu przeszkoda
-    * \param[in] prz - obiekt typu Przeszkoda
-    */
-	  //bool czyKolizjaZPrzeszkoda(Przeszkoda prz);
-
-    /*!
-    * funkcja: sprawdzenie kolizji z obiektem typu robot
-    * \param[in] prz - obiekt typu Robot
-    */
-	  //bool czyKolizjaZRobotem(Robot rbt);
-
-    /*!
     * funkcja: rysowanie trasy za robotem
     * \param[in] &trs - obiekt typu trasa
     */

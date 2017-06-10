@@ -31,8 +31,18 @@ class Scena{
 
   public:
 
+  /*!
+  * funkcja: wyswietlenie listy robotow wraz z ich wspolrzednymi
+  * \param[in] &str - strumien wyjscioowy z referencja
+  */
   void wyswietlPozycjeRobotow(std::ostream & str);
 
+  /*!
+  * funkcja: dodawanie obiektu graficznego do listy
+  * \param[in] typ - rodzaj dodawanego obiektu
+  * \param[in] wsp - wspolrzedne poczatkowe obiektu
+  * \param[in] rozm - rozmiary obiektu
+  */
   void dodajObiektGraf(TypObiektu typ, Wektor2D wsp, Wektor2D rozm);
 
   /*!

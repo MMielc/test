@@ -151,7 +151,7 @@ while(znak != 'k')
     case 'p':
       SCN = bck;
       SCN.wyswietlScene();
-      cout<<"przyrocono domyslna scene"<<endl; 
+      cout<<"przywrocono domyslna scene"<<endl; 
     break;
 
     case 'w':
